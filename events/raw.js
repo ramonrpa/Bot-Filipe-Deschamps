@@ -1,9 +1,8 @@
+const emojiToRole = require('../emojiRole.json')
 
 module.exports = async function onraw(event) {
-    const emojiToRole = require('../emojiRole.json')
+
     if (event.t === 'MESSAGE_REACTION_ADD' || event.t === 'MESSAGE_REACTION_REMOVE') {
-        
-        const emojiToRole = require('../emojiRole.json')
 
         if (emojiToRole.id !== event.d.message_id) return
 
