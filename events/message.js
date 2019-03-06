@@ -19,6 +19,6 @@ module.exports = async function onMessage(message) {
 
   if (command) {
     console.log(`${message.author.username} (${message.author.id}) executou o comando: ${command.name}`)
-    await command._run(message, args)
+    await command._run(message, args, { prefix })
   }
 }

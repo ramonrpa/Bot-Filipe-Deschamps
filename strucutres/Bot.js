@@ -10,7 +10,7 @@ class Bot extends Client {
   async initializeCommands (path = 'commands') {
     return await getFiles(path, (Command, name) => {
       const command = new Command(this)
-      if (command.name === 'none') command.name === name
+      if (command.name === 'none') command.name = name
       this.commands.set(name, command)
     }, console.error)
   }
@@ -20,7 +20,7 @@ class Bot extends Client {
   }
 
   async start (token = null) {
-    //await this.initializeCommands()
+    await this.initializeCommands()
     await this.initializeListeners()
     await this.login(token) 
   }
