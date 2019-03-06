@@ -1,6 +1,5 @@
 
-module.exports = async (client, member) => {
-
+module.exports = async function onGuildMemberAdd(member) {
   const message = {
     'content': '',
     'embed': {
@@ -13,5 +12,6 @@ module.exports = async (client, member) => {
     }
   }
 
-  member.guild.channels.get(process.env.GREETCHANNEL).send(message).catch()
+  const channel = process.env.GREETCHANNEL && member.guild.channels.get(process.env.GREETCHANNEL)
+  if (channel) channel.send(message)
 }
