@@ -4,7 +4,7 @@ module.exports = async function onGuildMemberAdd(member) {
     'content': '',
     'embed': {
       'color': 15614245,
-      'description': `➦ Olá ${member}, seja bem vindo(a) a Pirates Rust!\n➦ Leia as regras do servidor!`,
+      'description': `➦ Olá ${member}, seja bem vindo(a)!\n➦ Leia as regras do servidor!`,
       'author': {
         'name': `${member.user.username}`,
         'icon_url': member.user.displayAvatarURL
@@ -15,3 +15,4 @@ module.exports = async function onGuildMemberAdd(member) {
   const channel = process.env.GREETCHANNEL && member.guild.channels.get(process.env.GREETCHANNEL)
   if (channel) channel.send(message)
 }
+
