@@ -3,14 +3,13 @@ module.exports = async function onMessage(message) {
   const mentionClient = (message.guild ? message.guild.me.toString() : this.user.toString()) + ' '
   const prefix = message.content.startsWith(mentionClient) ? mentionClient : (process.env.PREFIX && message.content.startsWith(process.env.PREFIX)) ? process.env.PREFIX : null
   
-  if (!prefix || message.author.bot) return
-
-  // ignore messages in suggestion channel
   if (message.channel.id === process.env.SUGESTOES && !message.content.startsWith('^')) {
-    await message.react('⬆')
-    await message.react('⬇')
+    await message.react(message.guild.emojis.find(emoji => emoji.name === "apoio"))
+    await message.react(message.guild.emojis.find(emoji => emoji.name === "naoapoio"))
     return
   }
+  
+  if (!prefix || message.author.bot) return
 
   // Check Command and execute Command
   const args = message.content.slice(prefix.length).trim().split(/ +/g)
