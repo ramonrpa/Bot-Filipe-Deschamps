@@ -14,12 +14,12 @@ class Help extends Command {
       .setDescription('➦ Todos os comandos disponíveis')
 
     for (const command of this.client.commands.array()) {
-      embed.addField(command.name, `**Descrição**: ${command.description}\n **Como Usar**: ${command.getUsage(prefix)}`)
+      embed.addField(`**${prefix}${command.name}**`, `**Descrição**: ${command.description}\n **Como Usar**: ${command.getUsage(prefix)}`)
     }
 
     try {
-      const m = await message.channel.send(embed)
-      await m.react('👌')
+      const m = await message.author.send(embed)
+      await message.react('👌')
     } catch(_) {
       message.reply('Desculpe, mas eu não tenho permissões para enviar mensagens por DM para você!')
     }
