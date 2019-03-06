@@ -1,41 +1,29 @@
-module.exports = {
-  run: (client, message, args) => {
+const Command = require('../strucutres/Command')
 
-    if (!message.member) return
+class Limpar extends Command {
+  constructor (client) {
+    super(client)
+    this.guildOnly = true
+    this.requiredArgs = true
+    this.category = 'Moderação'
+    this.description ='Apaga mensagens de um canal.'
+    this.usage = '[1 - 100]'
+    this.permissions = ['MANAGE_MESSAGES']
+  }
 
-
-    if (!message.member.hasPermission('MANAGE_MESSAGES')) return message.reply('Você não pode fazer isto :c')
-
-    var limit = 100
-    if (args.length === 1) {
-      limit = parseInt(args[0])
-    } else {
-      return message.reply(`?? Talvez isso possa ajudá-lo: \`\`\`${process.env.PREFIX}${module.exports.help.usage}\`\`\``)
+  async run (message, [ count ], { prefix }) {
+    count = parseInt(count)
+    if (!isNaN(count) && !(count >= 1) && !(count <= 100)) {
+      return message.channel.send(this.getUsage(prefix, true))
     }
+    try {
+    const messages = await message.channel.bulkDelete(count)
+    const m = await message.channel.send(`${messages.size} mensagens foram deletadas.`)
+    await m.delete(2000)
+    } catch (_) {
 
-    if (!Number.isInteger(limit)) return message.reply(`?? Talvez isso possa ajudá-lo: \`\`\`${process.env.PREFIX}${module.exports.help.usage}\`\`\``)
- 
-    limit++
-
-    limit = Math.min(limit, 99)
-
-    message.channel.bulkDelete(limit)
-      .then(messages => {
-        message.channel.send(`${messages.size} mensagens foram deletadas.`)
-          .then(message => setTimeout(() => message.delete(), 2000))
-      })
-  },
-
-  conf: {
-    onlyguilds: true
-  },
-
-  get help () {
-    return {
-      name: 'limpar',
-      category: 'Moderação',
-      description: 'Apaga mensagens de um canal.',
-      usage: 'limpar [1 - 100]'
-    }
+    } 
   }
 }
+
+module.exports = Limpar
