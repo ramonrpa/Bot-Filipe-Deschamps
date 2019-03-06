@@ -9,7 +9,7 @@ function formatDate(template, date) {
     }, template)
 }
 
-class Avatar extends Command {
+class UserInfo extends Command {
   constructor (client) {
     super(client)
     this.guildOnly = true
@@ -30,9 +30,9 @@ class Avatar extends Command {
         .addField('Bot:', `${member.user.bot}`, true)
         .addField('Status:', member.user.presence.status, true)
         .addField('Game:', (member.user.presence.game && member.user.presence.game.name) || 'None', true)
-        .addField('Roles:', member.roles.map(role => role.name).join(', '))
+        .addField('Roles:', member.roles.map(role => role.name).join(', '), true)
     message.channel.send(embed)
   }
 }
 
-module.exports = Avatar
+module.exports = UserInfo
