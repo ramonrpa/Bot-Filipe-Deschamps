@@ -12,7 +12,6 @@
   "author": "Ramon Rodrigues",
   "dependencies": {
     "discord.js": "^11.4.2",
-    "dotenv": "^6.2.0",
-    "enmap": "^4.8.1"
+    "dotenv": "^6.2.0"
   }
 }
