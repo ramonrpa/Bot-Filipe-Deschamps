@@ -11,10 +11,10 @@ class Limpar extends Command {
     this.permissions = ['MANAGE_MESSAGES']
   }
 
-  async run (message, [ count ]) {
+  async run (message, [ count ], { prefix }) {
     count = parseInt(count)
     if (!isNaN(count) && !(count >= 1) && !(count <= 100)) {
-      return message.channel.send(this.usage)
+      return message.channel.send(this.getUsage(prefix, true))
     }
     try {
     const messages = await message.channel.bulkDelete(count)

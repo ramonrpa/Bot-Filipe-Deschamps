@@ -16,6 +16,9 @@ class Command {
     throw new Error(`Function run undefined in ${this.constructor.name}.`)
   }
 
+  getUsage (prefix, addContent = false) {
+    return  (addContent ? `?? Talvez isso possa ajudá-lo:` : '') + `${prefix + this.name} ${this.usage}`
+  }
   async _run (message, args, content) {
     if (!message.guild && this.guildOnly) return
 
@@ -29,10 +32,8 @@ class Command {
       return message.channel.send(`Você não tem as permissões necessarias. ${clientPermissions.join(', ')}`)
     }
 
-    this.usage = `?? Talvez isso possa ajudá-lo: ${content.prefix + this.name} ${this.usage}`
-
     if (args.length === 0 && this.requiredArgs) {
-      return message.channel.send(this.usage)
+      return message.channel.send(this.getUsage(content.prefix, true))
     }
     return await this.run(message, args, content)
   }

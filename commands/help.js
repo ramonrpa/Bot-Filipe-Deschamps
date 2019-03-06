@@ -1,34 +1,29 @@
-module.exports = {
-    run: (client, message, args) => {
-    
-      let embed = {
-        color: 15614245,
-        title: 'Lista de Comandos ',
-        description: '➦ Todos os comandos disponíveis',
-        fields: []
-      }
-  
-      client.commands.forEach(command => {
-        embed.fields.push(
-          {
-            name: `**${process.env.PREFIX}${command.help.name}**`,
-            value: `**Descrição**: ${command.help.description}\n**Como Usar**: ${process.env.PREFIX}${command.help.usage}`
-          }
-        )
-      })
-  
-  
-      message.author.send({ embed: embed })
-        .then(() => message.react('👌'))
-        .catch(() => message.reply('Desculpe, mas eu não tenho permissões para enviar mensagens por DM para você!'))
-    },
-  
-    conf: {},
-  
-    help: {
-      name: 'help',
-      category: 'Help',
-      description: 'Mostra todos os comandos disponíveis do bot.',
-      usage: 'help'
+const Command = require('../strucutres/Command')
+const { RichEmbed } = require('discord.js')
+class Help extends Command {
+  constructor (client) {
+    super(client)
+    this.category = 'Help'
+    this.description = 'Mostra todos os comandos disponíveis do bot.'
+  }
+
+  async run (message, _, { prefix }) {
+    const embed = new RichEmbed()
+      .setColor(15614245)
+      .setTitle('Lista de Comandos')
+      .setDescription('➦ Todos os comandos disponíveis')
+
+    for (const command of this.client.commands.array()) {
+      embed.addField(command.name, `**Descrição**: ${command.description}\n **Como Usar**: ${command.getUsage(prefix)}`)
+    }
+
+    try {
+      const m = await message.channel.send(embed)
+      await m.react('👌')
+    } catch(_) {
+      message.reply('Desculpe, mas eu não tenho permissões para enviar mensagens por DM para você!')
     }
   }
+}
+
+module.exports = Help
