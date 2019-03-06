@@ -1,7 +1,5 @@
 
-module.exports = async (client) => {
- 
-  console.log('log', `O Bot foi iniciado completamente com ${client.users.size} usuarios em ${client.guilds.size} servidores`)
- 
-  client.user.setPresence({ status: 'online', game: { name: process.env.GAME } })
+module.exports = function onReady() {
+  console.log('log', `O Bot foi iniciado completamente com ${this.users.size} usuarios em ${this.guilds.size} servidores`)
+  this.user.setPresence({ status: 'online', game: { name: process.env.GAME } })
 }
