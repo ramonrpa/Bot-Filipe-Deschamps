@@ -7,7 +7,7 @@ class Bot extends Client {
     this.commands = new Collection()
   }
 
-  async initializeCommands (path = '../commands') {
+  async initializeCommands (path = 'commands') {
     return await getFiles(path, (Command, name) => {
       const command = new Command(this)
       if (command.name === 'none') command.name === name
@@ -15,13 +15,13 @@ class Bot extends Client {
     }, console.error)
   }
 
-  async initializeListeners (path = '../events') {
+  async initializeListeners (path = 'events') {
     return await getFiles(path, (Event, name) => this.on(name, Event), console.error)
   }
 
   async start (token = null) {
-    await this.initializeCommands()
-    await this.initializeCommands()
+    //await this.initializeCommands()
+    await this.initializeListeners()
     await this.login(token) 
   }
 }

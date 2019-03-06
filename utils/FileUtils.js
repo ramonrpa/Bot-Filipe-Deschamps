@@ -6,7 +6,7 @@ const readdir = promisify(fs.readdir)
 const path = require('path')
 
 class FileUtils {
-  static getFiles (dirPath, sucess, error) {
+  static async getFiles (dirPath, success, error) {
     const files = await readdir(dirPath)
     const filesObject = {}
     return Promise.all(files.map(async file => {
