@@ -14,7 +14,7 @@ class Help extends Command {
       .setDescription('➦ Todos os comandos disponíveis')
 
     for (const command of this.client.commands.array()) {
-      embed.addField(`**${prefix}${command.name}**`, `**Descrição**: ${command.description}\n **Como Usar**: ${command.getUsage(prefix)}`)
+      embed.addField(`**${command.name}**`, `**Descrição**: ${command.description}\n **Como Usar**: ${command.getUsage(prefix)}`)
     }
 
     try {
