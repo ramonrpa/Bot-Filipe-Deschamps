@@ -24,7 +24,7 @@ class UserInfo extends Command {
         .setTitle(member.user.tag)
         .setThumbnail(member.user.displayAvatarURL)
         .addField('ID:', member.user.id, true)
-        .addField('Nickname:', member.user.usernam || 'None', true)
+        .addField('Nickname:', member.user.username || 'None', true)
         .addField('Created At:', formatDate('DD/MM/YYYY, às HH:mm:ss', member.user.createdAt), true)
         .addField('Joined At:', formatDate('DD/MM/YYYY, às HH:mm:ss', member.joinedAt), true)
         .addField('Bot:', `${member.user.bot}`, true)
