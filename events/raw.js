@@ -24,6 +24,7 @@ module.exports = async function onraw(event) {
                             .addField('**Sugestão**', message.content)
                             .setFooter(`Enviado por ${message.member.user.tag}`)
                             adminsugestionchannel.send(embed)
+                            message.delete(1000)
                         }
                     }
                 }
