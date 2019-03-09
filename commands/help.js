@@ -12,9 +12,15 @@ class Help extends Command {
       .setColor(15614245)
       .setTitle('Lista de Comandos')
       .setDescription('➦ Todos os comandos disponíveis')
-
+	  
     for (const command of this.client.commands.array()) {
-      embed.addField(`**${command.name}**`, `**Descrição**: ${command.description}\n **Como Usar**: ${command.getUsage(prefix)}`)
+      if (command.name !== 'help') {
+        const permissions = message.guild && command.permissions.filter(p => !message.channel.permissionsFor(message.member).has(p)).map(p => `\`${p}\``)
+        console.log("COMMAND: " + command.permissions.length + " | " + permissions.length + " | " + command.permissions + " | " + permissions)
+        if (permissions.length == 0){
+          embed.addField(`**${command.name}**`, `**Descrição**: ${command.description}\n **Como Usar**: ${command.getUsage(prefix)}`)
+        }
+      }
     }
 
     try {

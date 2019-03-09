@@ -6,6 +6,7 @@ class Limpar extends Command {
     this.requiredArgs = true
     this.category = 'Adiministração'
     this.description ='Mudar status do bot.'
+	this.permissions = ['ADMINISTRATOR']
   }
 
   async run (message, args, { prefix }) {
