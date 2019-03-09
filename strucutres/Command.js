@@ -17,10 +17,16 @@ class Command {
   }
 
   getUsage (prefix, addContent = false) {
-    return  (addContent ? `?? Talvez isso possa ajudá-lo:` : '') + `${prefix + this.name} ${this.usage}`
+    return  (addContent ? `Talvez isso possa ajudá-lo:` : '') + `${prefix + this.name} ${this.usage}`
   }
   async _run (message, args, content) {
     if (!message.guild && this.guildOnly) return
+
+    if (message.channel.id !== process.env.COMMANDSCHANNEL){
+      if (!message.channel.permissionsFor(message.member).has('ADMINISTRATOR')){
+        return message.delete(1000)
+      }
+    }
 
     const permissions = message.guild && this.permissions.filter(p => !message.channel.permissionsFor(message.member).has(p)).map(p => `\`${p}\``)
     if (this.permissions.length > 0 && permissions && permissions.length > 0) {
