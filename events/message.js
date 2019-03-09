@@ -3,7 +3,7 @@ module.exports = async function onMessage(message) {
   const mentionClient = (message.guild ? message.guild.me.toString() : this.user.toString()) + ' '
   const prefix = message.content.startsWith(mentionClient) ? mentionClient : (process.env.PREFIX && message.content.startsWith(process.env.PREFIX)) ? process.env.PREFIX : null
   
-  if (message.channel.id === process.env.SUGESTOES && !message.content.startsWith('^')) {
+  if (message.channel.id === process.env.SUGESTIONSCHANNEL && !message.content.startsWith('^')) {
     await message.react(message.guild.emojis.find(emoji => emoji.name === "apoio"))
     await message.react(message.guild.emojis.find(emoji => emoji.name === "naoapoio"))
     return
