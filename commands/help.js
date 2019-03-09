@@ -16,7 +16,6 @@ class Help extends Command {
     for (const command of this.client.commands.array()) {
       if (command.name !== 'help') {
         const permissions = message.guild && command.permissions.filter(p => !message.channel.permissionsFor(message.member).has(p)).map(p => `\`${p}\``)
-        console.log("COMMAND: " + command.permissions.length + " | " + permissions.length + " | " + command.permissions + " | " + permissions)
         if (permissions.length == 0){
           embed.addField(`**${command.name}**`, `**Descrição**: ${command.description}\n **Como Usar**: ${command.getUsage(prefix)}`)
         }
