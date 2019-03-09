@@ -1,13 +1,11 @@
 {
-    "id" : "552967547989786632",
+    "id" : "553759618749169664",
     "emojis": {
         "js": "JavaScript",
         "csharp": "C#",
         "c_": "C++",
-        "vb": "VisualBasic",
         "python": "Python",
         "PHP": "PHP",
-        "java": "Java",
         "html5": "Html5"
     }
 }
