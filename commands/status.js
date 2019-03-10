@@ -4,7 +4,7 @@ class Limpar extends Command {
   constructor (client) {
     super(client)
     this.requiredArgs = true
-    this.category = 'Adiministração'
+    this.category = 'Dono'
     this.description ='Mudar status do bot.'
 	this.permissions = ['ADMINISTRATOR']
   }
