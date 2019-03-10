@@ -14,6 +14,7 @@ module.exports = async function onraw(event) {
                 const rejects = message.reactions.get(process.env.NAOAPOIOEMOJI)
                 if (rejects != null) {
                     const total = aproves.users.size + rejects.users.size - 2
+                    console.log("Coletados " + total + " reações da mensagem de id " + event.d.message_id)
                     if (total >= process.env.SUGESTIONMINVOTE) {
                         var sub = total - rejects.users.size
                         var percentagemAproves = (sub / total) * 100
