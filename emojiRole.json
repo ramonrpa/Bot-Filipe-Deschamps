@@ -6,6 +6,9 @@
         "c_": "C++",
         "python": "Python",
         "PHP": "PHP",
-        "html5": "Html5"
+        "html5": "Html5",
+        "Java": "Java",
+        "Kotlin": "Kotlin",
+        "Luascript": "Lua"
     }
 }
