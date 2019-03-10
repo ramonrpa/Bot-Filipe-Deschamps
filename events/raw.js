@@ -10,8 +10,8 @@ module.exports = async function onraw(event) {
             if (!sugestionchannel) return
 
             sugestionchannel.fetchMessage(event.d.message_id).then(message => {
-                const aproves = message.reactions.get(process.env.APOIOEMOJI)
-                const rejects = message.reactions.get(process.env.NAOAPOIOEMOJI)
+                const aproves = message.reactions.find(r => r.emoji.id === process.env.APOIOEMOJI)
+                const rejects = message.reactions.find(r => r.emoji.id === process.env.NAOAPOIOEMOJI)
                 if (rejects != null) {
                     const total = aproves.users.size + rejects.users.size - 2
                     console.log("Coletados " + total + " reações da mensagem de id " + event.d.message_id)
