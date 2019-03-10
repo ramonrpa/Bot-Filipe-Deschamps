@@ -1,4 +1,5 @@
 const Command = require('../strucutres/Command')
+const { RichEmbed } = require('discord.js')
 
 function clean(text) {
     if (typeof (text) === "string")
