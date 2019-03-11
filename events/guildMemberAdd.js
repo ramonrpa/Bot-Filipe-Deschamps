@@ -1,5 +1,6 @@
 
 module.exports = async function onGuildMemberAdd(member) {
+  const memberrole = member.guild.roles.find(r => r.name == "Membro's")
   const message = {
     'content': '',
     'embed': {
@@ -14,5 +15,6 @@ module.exports = async function onGuildMemberAdd(member) {
 
   const channel = process.env.GREETCHANNEL && member.guild.channels.get(process.env.GREETCHANNEL)
   if (channel) channel.send(message)
+  member.setRoles([memberrole])
 }
 
