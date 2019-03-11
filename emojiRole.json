@@ -9,6 +9,7 @@
         "html5": "Html5",
         "Java": "Java",
         "Kotlin": "Kotlin",
-        "Luascript": "Lua"
+        "Luascript": "Lua",
+        "golang": "Golang"
     }
 }
