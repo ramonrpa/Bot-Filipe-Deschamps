@@ -1,3 +1,12 @@
+const mapping = (function(object) {
+    let numbers = [];
+    for(let key in object) {
+        numbers.push({regex: new RegExp(key, 'ig'), replacement: object[key]
+     });
+    };
+    return numbers;
+})({"0": ":zero:", "1": ":one:", "2": ":two:", "3": ":three:", "4": ":four:", "5": ":five:", "6": ":six:", "7": ":seven:", "8": ":eight:", "9": ":nine:"});
+
 
 module.exports = async function onGuildMemberAdd(member) {
   const memberrole = member.guild.roles.find(r => r.name == "Membro's")
@@ -15,6 +24,10 @@ module.exports = async function onGuildMemberAdd(member) {
 
   const channel = process.env.GREETCHANNEL && member.guild.channels.get(process.env.GREETCHANNEL)
   if (channel) channel.send(message)
+  if (channel) return; //Se o bot estiver em mais de um servidor, ele vai ignorar /shrug
+  let count = member.guild.memberCount.toString(); //member.guild.memberCount retorna Number, então transformei em String
+  mapping.forEach(r => count = count.replace(r.regex, r.replacement)); //Agora vamos dar um replace usando a function
+  channel.setTopic(`Temos ${count} membros no servidor!`); //Pronto!
   member.setRoles([memberrole])
 }
 
