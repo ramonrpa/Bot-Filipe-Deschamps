@@ -24,10 +24,10 @@ module.exports = async function onGuildMemberAdd(member) {
 
   const channel = process.env.GREETCHANNEL && member.guild.channels.get(process.env.GREETCHANNEL)
   if (channel) channel.send(message)
-  if (channel) return; //Se o bot estiver em mais de um servidor, ele vai ignorar /shrug
-  let count = member.guild.memberCount.toString(); //member.guild.memberCount retorna Number, então transformei em String
-  mapping.forEach(r => count = count.replace(r.regex, r.replacement)); //Agora vamos dar um replace usando a function
-  channel.setTopic(`Temos ${count} membros no servidor!`); //Pronto!
+  if (!channel) return;
+  let count = member.guild.memberCount.toString(); 
+  mapping.forEach(r => count = count.replace(r.regex, r.replacement));
+  channel.setTopic(`Temos ${count} membros no servidor!`); 
   member.setRoles([memberrole])
 }
 
