@@ -26,6 +26,19 @@ module.exports = async function onGuildMemberAdd(member) {
   if (channel) channel.send(message)
   if (!channel) return;
   let count = member.guild.memberCount.toString(); 
+  let category = member.guild.channels.find(chan => chan.name === "Contador de Membros")
+  if (!category) category = await member.guild.createChannel('Contador de Membros','category')
+  let channelMember = await member.guild.channels.find(chan => chan.parentID === category.id)
+  if (!channelMember){
+    channelMember = member.guild.createChannel(`${count} Membros`, 'voice').then(async chan => {
+      await chan.setParent(category.id)
+      await chan.overwritePermissions(member.guild.roles.find('name', '@everyone'),{
+        'CONNECT': false
+      })
+    }).catch(console.error);
+  }else{
+    channelMember.setName(`${count} Membros`)
+  }
   mapping.forEach(r => count = count.replace(r.regex, r.replacement));
   channel.setTopic(`Temos ${count} membros no servidor!`); 
   member.setRoles([memberrole])
