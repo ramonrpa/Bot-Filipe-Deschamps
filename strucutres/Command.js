@@ -28,12 +28,12 @@ class Command {
       }
     }
 
-    const permissions = message.guild && this.permissions.filter(p => !message.channel.permissionsFor(message.member).has(p)).map(p => `\`${p}\``)
+    const permissions = message.guild && this.permissions.filter(p => !message.channel.permissionsFor(message.member).has(p)).map(p => `\`${permissoes[p]}\``)
     if (this.permissions.length > 0 && permissions && permissions.length > 0) {
       return message.channel.send(`Você não tem as permissões necessarias. ${permissions.join(', ')}`)
     }
 
-    const clientPermissions = message.guild && this.clientPermissions.filter(p => !message.channel.permissionsFor(message.guild.me).has(p)).map(p => `\`${p}\``)
+    const clientPermissions = message.guild && this.clientPermissions.filter(p => !message.channel.permissionsFor(message.guild.me).has(p)).map(p => `\`${permissoes[p]}\``)
     if (this.clientPermissions.length > 0 && clientPermissions && clientPermissions.length > 0) {
       return message.channel.send(`Você não tem as permissões necessarias. ${clientPermissions.join(', ')}`)
     }
@@ -46,3 +46,4 @@ class Command {
 }
 
 module.exports = Command
+const permissoes = require('../utils/permissions.json')
