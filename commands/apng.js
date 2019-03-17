@@ -25,9 +25,6 @@ class apng extends Command {
             if (!err) {
                 toapng('emoji.gif')
                     .then(() => {
-                        if (fs.existsSync('emoji.gif')) { 
-                            console.log('emoji.gif existe')
-                        }
                         message.guild.createEmoji('emoji.png', nome)
                         message.reply('Emoji animado adicionado com sucesso!')
                     })
