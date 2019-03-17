@@ -1,6 +1,7 @@
 const Command = require('../strucutres/Command')
 const toapng = require('gif-to-apng')
 const download = require('download-file')
+const fs = require('fs');
 
 class apng extends Command {
     constructor(client) {
@@ -24,6 +25,9 @@ class apng extends Command {
             if (!err) {
                 toapng('emoji.gif')
                     .then(() => {
+                        if (fs.existsSync('emoji.gif')) { 
+                            console.log('emoji.gif existe')
+                        }
                         message.guild.createEmoji('emoji.png', nome)
                         message.reply('Emoji animado adicionado com sucesso!')
                     })
