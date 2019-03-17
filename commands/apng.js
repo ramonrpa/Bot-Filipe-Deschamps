@@ -1,7 +1,6 @@
 const Command = require('../strucutres/Command')
 const toapng = require('gif-to-apng')
 const download = require('download-file')
-const fs = require('fs');
 
 class apng extends Command {
     constructor(client) {
