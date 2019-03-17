@@ -17,7 +17,7 @@ class Command {
   }
 
   getUsage (prefix, addContent = false) {
-    return  (addContent ? `Talvez isso possa ajudá-lo:` : '') + `${prefix + this.name} ${this.usage}`
+    return  (addContent ? `Talvez isso possa ajudá-lo: ` : '') + `${prefix + this.name} ${this.usage}`
   }
   async _run (message, args, content) {
     if (!message.guild && this.guildOnly) return
@@ -39,7 +39,7 @@ class Command {
     }
 
     if (args.length === 0 && this.requiredArgs) {
-      return message.channel.send(this.getUsage(content.prefix, true))
+      return message.reply(this.getUsage(content.prefix, true))
     }
     return await this.run(message, args, content)
   }
